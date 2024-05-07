@@ -22,7 +22,7 @@ Contributions are welcome! If you have any bookmarks or resources that you think
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](https://github.com/jibin-kr/aws-cloud-setup-bookmarks) file for details.
+This project is licensed under the MIT License 
 
 ## Acknowledgments
 
