@@ -29,4 +29,3 @@ This project is licensed under the MIT License
 - Thanks to all the contributors who have helped to expand this repository.
 - Special thanks to the AWS community for providing valuable resources and documentation.
 
-For more information on how to use AWS Cloud9 with GitHub, check out this [guide](https://aws.plainenglish.io/how-to-use-aws-cloud9-with-github-3136692fa44d).
