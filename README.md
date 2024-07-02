@@ -1,31 +1,31 @@
-# AWS Cloud Setup Bookmarks
+# Resolving Database Collation Issues during MySQL Backup Restore
 
-Welcome to the AWS Cloud Setup Bookmarks repository! This repository contains a collection of bookmarks and resources for setting up and managing AWS cloud environments.
+## The Problem
 
-## About
+When restoring a MySQL database backup from a newer version to an older version, you may encounter issues due to differences in database collation.
 
-This repository is a compilation of useful documentation and links that can assist developers and system administrators in setting up their AWS cloud infrastructure. It aims to provide a centralized location for AWS-related resources.
+## The Cause
 
-## How to Use
+The MySQL server running on the destination is an older version than the source, which means it doesn't contain the required database collation.
 
-To use the bookmarks, simply navigate to the `index.html` file and open it in your browser. You will find a list of categorized bookmarks that you can click on to access AWS documentation and other related resources.
+## The Solution
 
-## Contributing
+To resolve this issue, you need to make a small tweak to the backup file. Follow these steps:
 
-Contributions are welcome! If you have any bookmarks or resources that you think would be helpful to others, please feel free to add them to the repository. To contribute, follow these steps:
+### Edit the Backup File
 
-1. Fork the repository.
-2. Create a new branch for your contribution.
-3. Add your bookmarks or resources.
-4. Commit your changes with a descriptive message.
-5. Create a pull request.
+1. Open the database backup file in a text editor.
+2. Replace the following strings:
+	* `utf8mb4_0900_ai_ci` with `utf8mb4_general_ci`
+	* `CHARSET=utf8mb4` with `CHARSET=utf8`
 
-## License
+### Update the ENGINE Statement
 
-This project is licensed under the MIT License 
-
-## Acknowledgments
-
-- Thanks to all the contributors who have helped to expand this repository.
-- Special thanks to the AWS community for providing valuable resources and documentation.
-
+Replace the following line:
+```sql
+ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+```
+With
+```sql
+ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+```
