@@ -1,8 +1,38 @@
-<!DOCTYPE NETSCAPE-Bookmark-file-1>
-<!-- This is an automatically generated file.
-     It will be read and overwritten.
-     DO NOT EDIT! -->
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
-<TITLE>Resolving Database Collation Issues during MySQL Backup Restore</TITLE>
-<h2>Resolving Database Collation Issues during MySQL Backup Restore</h2>
-<h3>The Problem</h3> <p>When restoring a MySQL database backup from a newer version to an older version, you may encounter issues due to differences in database collation.</p> <h3>The Cause</h3> <p>The MySQL server running on the destination is an older version than the source, which means it doesn't contain the required database collation.</p> <h3>The Solution</h3> <p>To resolve this issue, you need to make a small tweak to the backup file. Follow these steps:</p> <h4>Edit the Backup File</h4> <ol> <li>Open the database backup file in a text editor.</li> <li>Replace the following strings: <ul> <li><code>utf8mb4_0900_ai_ci</code> with <code>utf8mb4_general_ci</code></li> <li><code>CHARSET=utf8mb4</code> with <code>CHARSET=utf8</code></li> </ul> </li> </ol> <h4>Update the ENGINE Statement</h4> <p>Replace the following line:</p> <pre><code>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;</code></pre> <p>With</p> <pre><code>ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;</code></pre>
+    <h3 class="mt-4">The Problem</h3>
+
+    <p class="lead">When restoring a MySQL database backup from a newer version to an older version, you may encounter issues due to differences in database collation.</p>
+
+    <h3 class="mt-4">The Cause</h3>
+
+    <p class="lead">The MySQL server running on the destination is an older version than the source, which means it doesn't contain the required database collation.</p>
+
+    <h3 class="mt-4">The Solution</h3>
+
+    <p class="lead">To resolve this issue, you need to make a small tweak to the backup file. Follow these steps:</p>
+
+    <h4 class="mt-4">Edit the Backup File</h4>
+
+    <ol class="list-group">
+        <li class="list-group-item">Open the database backup file in a text editor.</li>
+        <li class="list-group-item">Replace the following strings:
+            <ul class="list-group">
+                <li class="list-group-item"><code>utf8mb4_0900_ai_ci</code> with <code>utf8mb4_general_ci</code></li>
+                <li class="list-group-item"><code>CHARSET=utf8mb4</code> with <code>CHARSET=utf8</code></li>
+            </ul>
+        </li>
+    </ol>
+
+    <h4 class="mt-4">Update the ENGINE Statement</h4>
+
+    <p class="lead">Replace the following line:</p>
+
+    <pre class="alert alert-secondary"><code>ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;</code></pre>
+
+    <p class="lead">With</p>
+
+    <pre class="alert alert-secondary"><code>ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;</code></pre>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body> </html>
